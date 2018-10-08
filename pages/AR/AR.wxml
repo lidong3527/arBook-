@@ -1,0 +1,35 @@
+<view class='body' style='height: {{windowHeight}}px;'>
+  <camera class='camera' device-position="back" flash="off" binderror="error" style="width: 100%; height: {{windowHeight}}px;">
+    <cover-view class='mask' catchtap='onclick'></cover-view>
+    <!-- <cover-view class='start_btn' style="background:{{syncBgColor}};color:{{syncColor}}" catchtap='start_sync'>{{btnText}}大屏同步</cover-view> -->
+    <!-- <cover-view class='default_image_box'> -->
+    <cover-image hidden='{{listData.length > 0}}' class='default_image' catchtap='onclick' src='../images/default.png'></cover-image>
+    <cover-image hidden='{{listData.length > 0}}' class='default_image_show' catchtap='onclick' src='../images/default.png'></cover-image>
+    <!-- <cover-image hidden="{{sendFlag}}" style="transform: translate(-50%,-{{gifNumber}}%)" class='start_image' src='../images/start.gif'></cover-image>  -->
+    <!-- <cover-view hidden="{{sendFlag}}" class='start_image' src='../images/start.gif'></cover-view>  -->
+    <cover-image wx:if="{{showMoveImage}}" class='moveView' src='../images/line.png' style="transform: translateX(-50%) translateY({{moveNumber}}rpx);"></cover-image>
+    <cover-view hidden='{{listData.length > 0}}' catchtap='onclick' class="change_text">{{tipText}}</cover-view>
+    <cover-view class="change_text" style='width:100%;text-align:center' wx:if="{{pdfFlag}}">点击上方图标打开文档</cover-view>
+    <!-- </cover-view> -->
+    <cover-view wx:if="{{listData.length >= 1}}" class='list'>
+      <cover-view class="{{itemIndex == index?'li active':'li'}}" wx:for="{{listData}}" bindtap='clickChangeVideo' data-item="{{item}}" wx:key="{{index}}" data-index="{{index}}">
+        <cover-view>
+          <cover-image wx:if="{{itemIndex == index}}" class="img" src="../images/clickAfter.png" />
+          <cover-image wx:else class="img" src="../images/clickBefore.png" />
+          <cover-view wx:if="{{itemIndex == index}}" class='imgText'>教材{{index+1}}</cover-view>
+          <cover-view wx:else class='imgText'>教材{{index+1}}</cover-view>
+        </cover-view>
+      </cover-view> 
+    </cover-view>
+    <cover-view wx:if="{{listData.length >= 1}}" class='backButton' catchtap='goBack'>
+      <cover-image src='../images/back.png'></cover-image>
+    </cover-view>
+    <cover-view class='pdfImage' wx:if="{{pdfFlag}}">
+      <cover-image class='pdfImage2' bindtap='openFileClick' src='../images/docs2.png'></cover-image>
+    </cover-view>
+  </camera>
+  <video wx:if="{{videoFlag}}" class='video' autoplay="true" id="myVideo" src="{{videoSrc}}" controls objectFit="contain"></video>
+   <!-- <canvas wx:if="{{canvasFlag}}" class='canvas' canvas-id="myCanvas" style="border: 1px solid red;" />   -->
+    <canvas catchtap='onclick' style="height:{{windowHeight}}px;width:{{windowWidth}}px" canvas-id='myCanvas'></canvas> 
+</view>
+<!-- <button bindtap='requestPayment'>微信支付</button> -->
