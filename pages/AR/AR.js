@@ -1,6 +1,4 @@
 var app = getApp();
-var upng = require('../upng-js/UPNG.js');
-var SimpleConnection = require('../connection/simple_websocket_connection.js')
 var timer; //调用识别计时器
 var GifInter; //gif计时器
 var connection;
@@ -26,15 +24,13 @@ Page({
     syncColor:'white',
     pdfFlag:false,
     pdfPath:'',
-    itemIndex:0
+    itemIndex:0,
+    // windowWidth:300,
+    // windowHeight:300
   },
 
   onLoad: function(options) {
-    this.setData({
-      windowHeight: app.globalData.height,
-      windowWidth: app.globalData.width,
-      Number: app.globalData.Number
-    })
+    
     wx.clearStorage();
     GifInter = setInterval(() => {
       if (this.data.moveNumber == this.data.topPx) {
@@ -49,6 +45,17 @@ Page({
         // console.log('不执行动画')
       }
     }, 2100)
+  }, 
+
+  onReady: function(){
+    var that = this;
+    setTimeout(function(){
+      that.setData({
+        windowHeight: app.globalData.height,
+        windowWidth: app.globalData.width,
+        Number: app.globalData.Number
+      })
+    },300)
   },
 
   uploadImageBase64(base64) {

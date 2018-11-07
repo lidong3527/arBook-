@@ -7,8 +7,14 @@ Page({
 
   },
   onLoad: function () {
-    wx.reLaunch({
-      url: '../AR/AR',
-    })
+    
   },
+  onShow: function(){
+    setTimeout(function(){
+      wx.reLaunch({
+        url: '../AR/AR',
+      })
+    },300)
+    
+  }
 })
